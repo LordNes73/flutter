@@ -281,7 +281,6 @@ abstract class FlutterCommand extends Command<void> {
     );
     argParser.addOption(
       'web-hostname',
-      defaultsTo: 'localhost',
       help:
           'The hostname that the web server will use to resolve an IP to serve '
           'from. The unresolved hostname is used to launch Chrome when using '
@@ -596,6 +595,7 @@ abstract class FlutterCommand extends Command<void> {
     );
   }
 
+<<<<<<< HEAD
   late final bool enableDds = () {
     var ddsEnabled = false;
     if (argResults?.wasParsed('disable-dds') ?? false) {
@@ -619,8 +619,11 @@ abstract class FlutterCommand extends Command<void> {
     }
     return ddsEnabled;
   }();
+=======
+  late final bool enableDds = boolArg('dds');
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 
-  bool get _hostVmServicePortProvided =>
+  bool bool bool get _hostVmServicePortProvided =>
       (argResults?.wasParsed(vmServicePortOption) ?? false) ||
       (argResults?.wasParsed('host-vmservice-port') ?? false);
 
@@ -757,6 +760,7 @@ abstract class FlutterCommand extends Command<void> {
   void usesDartDefineOption() {
     argParser.addMultiOption(
       FlutterOptions.kDartDefinesOption,
+      abbr: 'D',
       aliases: <String>[kDartDefines], // supported for historical reasons
       help:
           'Additional key-value pairs that will be available as constants '
@@ -1625,7 +1629,10 @@ abstract class FlutterCommand extends Command<void> {
     });
 
     if (argParser.options.containsKey(FlutterOptions.kDartDefinesOption)) {
-      dartDefines.addAll(stringsArg(FlutterOptions.kDartDefinesOption));
+      final Iterable<String> defines = stringsArg(
+        FlutterOptions.kDartDefinesOption,
+      ).where((string) => string.isNotEmpty);
+      dartDefines.addAll(defines);
     }
 
     return dartDefines;
@@ -1988,7 +1995,7 @@ abstract class FlutterCommand extends Command<void> {
   @mustCallSuper
   Future<void> validateCommand() async {
     if (_requiresPubspecYaml && globalResults?.wasParsed('packages') != true) {
-      // Don't expect a pubspec.yaml file if the user passed in an explicit .packages file path.
+      // Don't expect a pubspec.yaml file if the user passed in an explicit package_config.json file path.
 
       // If there is no pubspec in the current directory, look in the parent
       // until one can be found.

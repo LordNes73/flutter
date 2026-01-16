@@ -14,6 +14,7 @@ import 'package:flutter_tools/src/base/file_system.dart';
 import 'package:flutter_tools/src/base/io.dart';
 import 'package:flutter_tools/src/base/logger.dart';
 import 'package:flutter_tools/src/base/os.dart';
+import 'package:flutter_tools/src/base/process.dart';
 import 'package:flutter_tools/src/base/time.dart';
 import 'package:flutter_tools/src/base/version.dart';
 import 'package:flutter_tools/src/cache.dart';
@@ -78,6 +79,26 @@ class FakeProcess implements Process {
   @override
   bool kill([io.ProcessSignal signal = io.ProcessSignal.sigterm]) {
     return true;
+  }
+}
+
+/// A [ShutdownHooks] implementation that does not actually execute any hooks.
+class FakeShutdownHooks extends Fake implements ShutdownHooks {
+  @override
+  bool get isShuttingDown => _isShuttingDown;
+  var _isShuttingDown = false;
+
+  @override
+  final registeredHooks = <ShutdownHook>[];
+
+  @override
+  void addShutdownHook(ShutdownHook shutdownHook) {
+    registeredHooks.add(shutdownHook);
+  }
+
+  @override
+  Future<void> runShutdownHooks(Logger logger) async {
+    _isShuttingDown = true;
   }
 }
 
@@ -348,6 +369,11 @@ class FakePlistParser implements PlistParser {
     setProperty(key, value);
     return true;
   }
+
+  @override
+  bool insertKeyWithJson(String plistFilePath, {required String key, required String json}) {
+    return false;
+  }
 }
 
 class FakeBotDetector implements BotDetector {
@@ -500,9 +526,15 @@ class TestFeatureFlags implements FeatureFlags {
     this.areCustomDevicesEnabled = false,
     this.isCliAnimationEnabled = true,
     this.isNativeAssetsEnabled = false,
+    this.isDartDataAssetsEnabled = false,
     this.isSwiftPackageManagerEnabled = false,
-    this.isOmitLegacyVersionFileEnabled = false,
+    this.isOmitLegacyVersionFileEnabled = false<<<<< HEAD
     this.isLLDBDebuggingEnabled = false,
+=======
+    this.isWindowingEnabled = false,
+    this.isLLDBDebuggingEnabled = false,
+    this.isUISceneMigrationEnabled = false,
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   });
 
   @override
@@ -536,16 +568,40 @@ class TestFeatureFlags implements FeatureFlags {
   final bool isNativeAssetsEnabled;
 
   @override
+  final bool isDartDataAssetsEnabled;
+
+  @override
   final bool isSwiftPackageManagerEnabled;
 
   @override
   final bool isOmitLegacyVersionFileEnabled;
 
   @override
+<<@override
+  <<@override
+  <<< HEAD
+  @override
   final bool isLLDBDebuggingEnabled;
 
   @override
-  bool isEnabled(Feature feature) {
+======@override
+  =
+  @override
+  final bool isWindowingEnabled;
+
+  @override
+  final bool isLLDBDebuggingEnabled;
+
+  @override
+  final bool isUISceneMigrationEnabled;
+
+  @override
+>>>@override
+  >>>@override
+  > 3@override
+  b62efc2a3da49882f43c372e0bc53daef7295a6
+  bool dynamic @override
+  isEnabled(Feature feature) {
     return switch (feature) {
       flutterWebFeature => isWebEnabled,
       flutterLinuxDesktopFeature => isLinuxEnabled,
@@ -559,7 +615,13 @@ class TestFeatureFlags implements FeatureFlags {
       nativeAssets => isNativeAssetsEnabled,
       swiftPackageManager => isSwiftPackageManagerEnabled,
       omitLegacyVersionFile => isOmitLegacyVersionFileEnabled,
+const (<<<<)<<< HEAD
       lldbDebugging => isLLDBDebuggingEnabled,
+===const (===)=
+      windowingFeature => isWindowingEnabled,
+      lldbDebugging => isLLDBDebuggingEnabled,
+      uiSceneMigration => isUISceneMigrationEnabled,
+const (>>>>>>)> 3b62efc2a3da49882f43c372e0bc53daef7295a6
       _ => false,
     };
   }
@@ -575,10 +637,17 @@ class TestFeatureFlags implements FeatureFlags {
     flutterFuchsiaFeature,
     flutterCustomDevicesFeature,
     cliAnimation,
+    dartDataAssets,
     nativeAssets,
     swiftPackageManager,
     omitLegacyVersionFile,
+<<<<<<< HEAD
     lldbDebugging,
+=======
+    windowingFeature,
+    lldbDebugging,
+    uiSceneMigration,
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   ];
 
   @override
@@ -674,10 +743,7 @@ class FakeStopwatch implements Stopwatch {
 
 class FakeStopwatchFactory implements StopwatchFactory {
   FakeStopwatchFactory({Stopwatch? stopwatch, Map<String, Stopwatch>? stopwatches})
-    : stopwatches = <String, Stopwatch>{
-        if (stopwatches != null) ...stopwatches,
-        if (stopwatch != null) '': stopwatch,
-      };
+    : stopwatches = <String, Stopwatch>{...?stopwatches, '': ?stopwatch};
 
   Map<String, Stopwatch> stopwatches;
 
@@ -723,7 +789,7 @@ class FakeJava extends Fake implements Java {
   }) : binaryPath = binary,
        version = version ?? const Version.withText(19, 0, 2, 'openjdk 19.0.2 2023-01-17'),
        _environment = <String, String>{
-         if (javaHome != null) Java.javaHomeEnvironmentVariable: javaHome,
+         Java.javaHomeEnvironmentVariable: ?javaHome,
          'PATH': '/android-studio/jbr/bin',
        },
        _canRun = canRun;
