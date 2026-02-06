@@ -105,8 +105,13 @@ GetActualRenderingAPIForImpeller(
     return nullptr;
   }
 
+<<<<<<< HEAD
+  __system_property_get("ro.product.board", product_model);
+  if (IsKnownBadSOC(product_model)) {
+=======
   __system_property_get("ro.product.board", property);
   if (IsKnownBadSOC(property)) {
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
     FML_LOG(INFO)
         << "Known bad Vulkan driver encountered, falling back to OpenGLES.";
     return nullptr;

@@ -32,12 +32,16 @@ final firstLaunchMessagesWeb = <Pattern>[
   'Done loading previews.',
 ];
 
+<<<<<<< HEAD
+final subsequentLaunchMessagesWeb = <Pattern>[launchingOnDeviceRegExp, 'Done loading previews.'];
+=======
 final firstLaunchMessagesWebServer = <Pattern>[
   'Creating widget preview scaffolding at:',
   launchingOnDeviceRegExp,
   'main.dart is being served at',
   'Done loading previews.',
 ];
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 
 final subsequentLaunchMessagesWeb = <Pattern>[launchingOnDeviceRegExp, 'Done loading previews.'];
 
@@ -66,12 +70,16 @@ void main() {
     tryToDelete(tempDir);
   });
 
+<<<<<<< HEAD
+  Future<void> runWidgetPreview({required List<Pattern> expectedMessages, Uri? dtdUri}) async {
+=======
   Future<void> runWidgetPreview({
     required List<Pattern> expectedMessages,
     Uri? dtdUri,
     bool useWebServer = false,
     Uri? devToolsServerAddress,
   }) async {
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
     expect(expectedMessages, isNotEmpty);
     var i = 0;
     process = await processManager.start(<String>[

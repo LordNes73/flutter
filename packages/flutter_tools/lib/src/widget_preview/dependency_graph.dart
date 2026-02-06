@@ -85,6 +85,50 @@ class _PreviewVisitor extends RecursiveAstVisitor<void> {
 
   bool hasRequiredParams(FormalParameterList? params) {
     return params?.parameters.any((p) => p.isRequired) ?? false;
+<<<<<<< HEAD
+  }
+
+  @override
+  void visitAnnotation(Annotation node) {
+    if (!node.isPreview) {
+      return;
+    }
+    if (_currentFunction != null &&
+        !hasRequiredParams(_currentFunction!.functionExpression.parameters)) {
+      final Token returnType = (_currentFunction!.returnType! as NamedType).name2;
+      if (returnType.isWidget || returnType.isWidgetBuilder) {
+        _currentPreview = PreviewDetails(
+          packageName: packageName,
+          functionName: _currentFunction!.name.toString(),
+          isBuilder: returnType.isWidgetBuilder,
+        );
+      }
+    } else if (_currentConstructor != null && !hasRequiredParams(_currentConstructor!.parameters)) {
+      final returnType = _currentConstructor!.returnType as SimpleIdentifier;
+      final Token? name = _currentConstructor!.name;
+      _currentPreview = PreviewDetails(
+        packageName: packageName,
+        functionName: '$returnType${name == null ? '' : '.$name'}',
+        isBuilder: false,
+      );
+    } else if (_currentMethod != null && !hasRequiredParams(_currentMethod!.parameters)) {
+      final Token returnType = (_currentMethod!.returnType! as NamedType).name2;
+      if (returnType.isWidget || returnType.isWidgetBuilder) {
+        final parentClass = _currentMethod!.parent! as ClassDeclaration;
+        _currentPreview = PreviewDetails(
+          packageName: packageName,
+          functionName: '${parentClass.name}.${_currentMethod!.name}',
+          isBuilder: returnType.isWidgetBuilder,
+        );
+      }
+    }
+    node.visitChildren(this);
+    if (_currentPreview != null) {
+      previewEntries.add(_currentPreview!);
+      _currentPreview = null;
+    }
+=======
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   }
 
   @override

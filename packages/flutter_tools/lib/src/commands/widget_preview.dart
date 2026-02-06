@@ -30,6 +30,10 @@ import '../isolated/resident_web_runner.dart';
 import '../project.dart';
 import '../resident_runner.dart';
 import '../runner/flutter_command.dart';
+<<<<<<< HEAD
+import '../runner/flutter_command_runner.dart';
+=======
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 import '../web/web_device.dart';
 import '../widget_preview/analytics.dart';
 import '../widget_preview/dependency_graph.dart';
@@ -181,8 +185,16 @@ final class WidgetPreviewStartCommand extends WidgetPreviewSubCommandBase with C
 
   @visibleForTesting
   static const kBrowserNotFoundErrorMessage =
+<<<<<<< HEAD
+      'Failed to locate browser. Make sure you are using an up-to-date Chrome or Edge.';
+======@override
+  =
       'Failed to locate browser. Make sure you are using an up-to-date Chrome or Edge. '
       'Otherwise, consider running with --$kWebServer instead.';
+@override
+  >>>@override
+  >>>@override
+  > 3b62efc2a3da49882f43c372e0bc53daef7295a6
 
   @override
   Future<Set<DevelopmentArtifact>> get requiredArtifacts async => const <DevelopmentArtifact>{
@@ -342,6 +354,16 @@ final class WidgetPreviewStartCommand extends WidgetPreviewSubCommandBase with C
       await _previewPubspecBuilder.populatePreviewPubspec(rootProject: rootProject);
     }
 
+<<<<<<< HEAD
+    shutdownHooks.addShutdownHook(() async {
+      await _widgetPreviewApp?.exitApp();
+      await _previewDetector.dispose();
+    });
+
+    final PreviewDependencyGraph graph = await _previewDetector.initialize();
+    _previewCodeGenerator.populatePreviewsInGeneratedPreviewScaffold(graph);
+
+=======
     if (!widgetPreviewScaffoldProject.dartTool.existsSync()) {
       await _previewPubspecBuilder.generatePackageConfig(
         widgetPreviewScaffoldProject: widgetPreviewScaffoldProject,
@@ -356,6 +378,7 @@ final class WidgetPreviewStartCommand extends WidgetPreviewSubCommandBase with C
     final PreviewDependencyGraph graph = await _previewDetector.initialize();
     _previewCodeGenerator.populatePreviewsInGeneratedPreviewScaffold(graph);
 
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
     await configureDtd();
     final int result = await runPreviewEnvironment(
       widgetPreviewScaffoldProject: widgetPreviewScaffoldProject,
@@ -437,7 +460,27 @@ final class WidgetPreviewStartCommand extends WidgetPreviewSubCommandBase with C
             ),
             deviceConnectionInterface: DeviceConnectionInterface.attached,
           ),
+<<<<<<< HEAD
+          deviceConnectionInterface: DeviceConnectionInterface.attached,
+        ),
+      );
+      if (devices.isEmpty) {
+        throwToolExit(kBrowserNotFoundErrorMessage);
+      }
+      final Device device;
+      if (devices.length > 1) {
+        // Prefer Google Chrome as the target browser.
+        device =
+            devices.firstWhereOrNull((device) => device is GoogleChromeDevice) ?? devices.first;
+
+        logger.printTrace(
+          'Detected ${devices.length} web devices (${devices.map((e) => e.displayName).join(', ')}). '
+          'Defaulting to ${device.displayName}.',
         );
+      } else {
+        device = devices.single;
+=======
+        )
 
         if (devices.isEmpty) {
           throwToolExit(kBrowserNotFoundErrorMessage);
@@ -454,6 +497,7 @@ final class WidgetPreviewStartCommand extends WidgetPreviewSubCommandBase with C
         } else {
           device = devices.single;
         }
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
       }
 
       // WARNING: this log message is used by test/integration.shard/widget_preview_test.dart

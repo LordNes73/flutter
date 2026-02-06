@@ -2625,8 +2625,13 @@ class FlushTestAllocator : public Allocator {
     return std::make_shared<FlushTestDeviceBuffer>(desc);
   };
 
+<<<<<<< HEAD
+  std::shared_ptr<Texture> OnCreateTexture(
+      const TextureDescriptor& desc) override {
+=======
   std::shared_ptr<Texture> OnCreateTexture(const TextureDescriptor& desc,
                                            bool threadsafe) override {
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
     return nullptr;
   }
 };
@@ -2638,10 +2643,14 @@ class FlushTestContentContext : public ContentContext {
       const std::shared_ptr<TypographerContext>& typographer_context,
       const std::shared_ptr<Allocator>& allocator)
       : ContentContext(context, typographer_context) {
+<<<<<<< HEAD
+    SetTransientsBuffer(HostBuffer::Create(
+=======
     SetTransientsDataBuffer(HostBuffer::Create(
         allocator, context->GetIdleWaiter(),
         context->GetCapabilities()->GetMinimumUniformAlignment()));
     SetTransientsIndexesBuffer(HostBuffer::Create(
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
         allocator, context->GetIdleWaiter(),
         context->GetCapabilities()->GetMinimumUniformAlignment()));
   }

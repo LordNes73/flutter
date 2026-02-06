@@ -595,9 +595,35 @@ abstract class FlutterCommand extends Command<void> {
     );
   }
 
+<<<<<<< HEAD
+  late final bool enableDds = () {
+    var ddsEnabled = false;
+    if (argResults?.wasParsed('disable-dds') ?? false) {
+      if (argResults?.wasParsed('dds') ?? false) {
+        throwToolExit(
+          'The "--[no-]dds" and "--[no-]disable-dds" arguments are mutually exclusive. Only specify "--[no-]dds".',
+        );
+      }
+      ddsEnabled = !boolArg('disable-dds');
+      if (ddsEnabled) {
+        globals.printWarning(
+          '${globals.logger.terminal.warningMark} The "--no-disable-dds" argument is deprecated and redundant, and should be omitted.',
+        );
+      } else {
+        globals.printWarning(
+          '${globals.logger.terminal.warningMark} The "--disable-dds" argument is deprecated. Use "--no-dds" instead.',
+        );
+      }
+    } else {
+      ddsEnabled = boolArg('dds');
+    }
+    return ddsEnabled;
+  }();
+=======
   late final bool enableDds = boolArg('dds');
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 
-  bool get _hostVmServicePortProvided =>
+  bool bool bool get _hostVmServicePortProvided =>
       (argResults?.wasParsed(vmServicePortOption) ?? false) ||
       (argResults?.wasParsed('host-vmservice-port') ?? false);
 

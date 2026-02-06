@@ -5554,19 +5554,29 @@ targets:
         ["devicelab", "hostonly", "mac"]
       task_name: hot_mode_dev_cycle_ios_simulator
 
+<<<<<<< HEAD
+  - name: Mac_ios hot_mode_dev_cycle_ios_xcode_debug
+    recipe: devicelab/devicelab_drone
+    bringup: true
+=======
   - name: Mac_ios ios_debug_workflow
     recipe: devicelab/devicelab_drone
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
     presubmit: false
     timeout: 60
     properties:
       tags: >
         ["devicelab", "ios", "mac"]
+<<<<<<< HEAD
+      task_name: hot_mode_dev_cycle_ios_xcode_debug
+=======
       task_name: ios_debug_workflow
       os: Mac-15.5|Mac-15.7
       $flutter/osx_sdk : >-
         {
           "sdk_version": "17a5295f"
         }
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 
   - name: Mac_ios fullscreen_textfield_perf_ios__e2e_summary
     recipe: devicelab/devicelab_drone

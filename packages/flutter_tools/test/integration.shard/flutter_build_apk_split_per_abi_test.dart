@@ -32,12 +32,21 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+<<<<<<< HEAD
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+=======
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
     }
 
     defaultConfig {

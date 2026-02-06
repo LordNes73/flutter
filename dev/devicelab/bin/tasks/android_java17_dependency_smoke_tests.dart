@@ -21,7 +21,11 @@ List<VersionTuple> versionTuples = <VersionTuple>[
   // Template
   VersionTuple(agpVersion: '8.9.1', gradleVersion: '8.12', kotlinVersion: '2.1.0'),
   // Max known
+<<<<<<< HEAD
+  VersionTuple(agpVersion: '8.10.0', gradleVersion: '9.1.0', kotlinVersion: '2.2.0'),
+=======
   VersionTuple(agpVersion: '8.13.0', gradleVersion: '9.1.0', kotlinVersion: '2.2.0'),
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   /* Others */
   VersionTuple(agpVersion: '8.4.0', gradleVersion: '8.6', kotlinVersion: '1.8.22'),
   VersionTuple(agpVersion: '8.6.0', gradleVersion: '8.7', kotlinVersion: '1.8.22'),

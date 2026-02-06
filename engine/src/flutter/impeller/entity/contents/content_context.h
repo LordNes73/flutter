@@ -316,6 +316,10 @@ class ContentContext {
 
  protected:
   // Visible for testing.
+<<<<<<< HEAD
+  void SetTransientsBuffer(std::shared_ptr<HostBuffer> host_buffer) {
+    host_buffer_ = std::move(host_buffer);
+=======
   void SetTransientsIndexesBuffer(std::shared_ptr<HostBuffer> host_buffer) {
     indexes_host_buffer_ = std::move(host_buffer);
   }
@@ -323,6 +327,7 @@ class ContentContext {
   // Visible for testing.
   void SetTransientsDataBuffer(std::shared_ptr<HostBuffer> host_buffer) {
     data_host_buffer_ = std::move(host_buffer);
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   }
 
  private:

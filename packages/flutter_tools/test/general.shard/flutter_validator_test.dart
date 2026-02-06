@@ -816,6 +816,16 @@ class FakeFlutterFeatures extends FeatureFlags {
   bool get isOmitLegacyVersionFileEnabled => _enabled;
 
   @override
+<<@override
+  <<@override
+  <<< HEAD
+  @override
+  bool get isLLDBDebuggingEnabled => _enabled;
+
+  @override
+======@override
+  =
+  @override
   bool get isWindowingEnabled => _enabled;
 
   @override
@@ -824,6 +834,10 @@ class FakeFlutterFeatures extends FeatureFlags {
   @override
   bool get isUISceneMigrationEnabled => _enabled;
 
+  @override
+>>>@override
+  >>>@override
+  > 3b62efc2a3da49882f43c372e0bc53daef7295a6
   @override
   final List<Feature> allFeatures;
 

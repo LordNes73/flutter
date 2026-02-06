@@ -1030,6 +1030,8 @@ class IOSDevice extends Device {
     final Version? xcodeVersion = globals.xcode?.currentVersion;
     final bool lldbFeatureEnabled = featureFlags.isLLDBDebuggingEnabled;
     if (xcodeVersion != null && xcodeVersion.major >= 26 && lldbFeatureEnabled) {
+<<<<<<< HEAD
+=======
       final DeviceLogReader deviceLogReader = getLogReader(
         app: package,
         usingCISystem: debuggingOptions.usingCISystem,
@@ -1038,6 +1040,7 @@ class IOSDevice extends Device {
         await deviceLogReader.listenToCoreDeviceLauncher(_coreDeviceLauncher);
       }
 
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
       final bool launchSuccess = await _coreDeviceLauncher.launchAppWithLLDBDebugger(
         deviceId: id,
         bundlePath: package.deviceBundlePath,

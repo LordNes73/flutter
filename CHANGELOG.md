@@ -30,6 +30,15 @@ More information and tips:
 docs/releases/Hotfix-Documentation-Best-Practices.md
 -->
 
+<<<<<<< HEAD
+## Flutter 3.35 Changes
+
+### [3.35.6](https://github.com/flutter/flutter/releases/tag/3.35.6)
+
+- [flutter/175669](https://github.com/flutter/flutter/issues/175669) `flutter analyze --suggestions` supports versions up to Java 25, Gradle 9 and AGP 9, Kotlin 2.2.20.
+- [flutter/172624](https://github.com/flutter/flutter/issues/172624) Fixes an issue that could result in a corrupt pipeline cache when using the Impeller Vulkan back end.
+
+=======
 ## Flutter 3.38 Changes
 
 ### [3.38.9](https://github.com/flutter/flutter/releases/tag/3.38.9)
@@ -95,6 +104,7 @@ Learn about what's new in this release in [the blog post](https://blog.flutter.d
 
 ## Flutter 3.35 Changes
 
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 ### [3.35.5](https://github.com/flutter/flutter/releases/tag/3.35.5)
 
  - [flutter/172105](https://github.com/flutter/flutter/issues/172105) Flutter view no longer hangs after multiple transitions on iOS add-to-app.
@@ -133,6 +143,10 @@ Learn about what's new in this release in [the blog post](https://blog.flutter.d
 ### [3.35.0](https://github.com/flutter/flutter/releases/tag/3.35.0)
 
 Initial stable release.
+<<<<<<< HEAD
+[Learn what's new in Flutter 3.35](https://medium.com/flutter/whats-new-in-flutter-3-35-c58ef72e3766).
+=======
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 
 ## Flutter 3.32 Changes
 

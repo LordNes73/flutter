@@ -621,6 +621,11 @@ static BOOL _preparedOnce = NO;
       // FlutterPlatformViewGestureRecognizersBlockingPolicyEager, but we should try it if a similar
       // issue arises for the other policy.
       if (@available(iOS 26.0, *)) {
+<<<<<<< HEAD
+        // This workaround does not work on iOS 26.
+        // TODO(hellohuanlin): find a solution for iOS 26,
+        // https://github.com/flutter/flutter/issues/175099.
+=======
         // This performs a nested DFS, with the outer one searching for any web view, and the inner
         // one searching for a TouchEventsGestureRecognizer inside the web view. Once found, disable
         // and immediately reenable it to reset its state.
@@ -630,6 +635,7 @@ static BOOL _preparedOnce = NO;
         if (!isWorkaroundDisabled.boolValue) {
           [self searchAndFixWebView:self.embeddedView];
         }
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
       } else if (@available(iOS 18.2, *)) {
         // This workaround is designed for WKWebView only. The 1P web view plugin provides a
         // WKWebView itself as the platform view. However, some 3P plugins provide wrappers of

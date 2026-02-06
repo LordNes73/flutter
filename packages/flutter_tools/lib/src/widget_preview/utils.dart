@@ -24,6 +24,8 @@ extension TokenExtension on Token {
 
   /// Convenience getter to identify Widget types.
   bool get isWidget => toString() == 'Widget';
+<<<<<<< HEAD
+=======
 }
 
 extension on InterfaceType {
@@ -36,6 +38,7 @@ extension on InterfaceType {
         }) !=
         null;
   }
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 }
 
 extension AnnotationExtension on Annotation {

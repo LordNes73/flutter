@@ -175,6 +175,8 @@ void main() {
     group('launchAppWithLLDBDebugger', () {
       testWithoutContext('succeeds', () async {
         final fakeCoreDeviceControl = FakeIOSCoreDeviceControl(
+<<<<<<< HEAD
+=======
           installResult: IOSCoreDeviceInstallResult.fromJson(const <String, Object?>{
             'info': <String, Object?>{'outcome': 'success'},
             'result': <String, Object?>{
@@ -183,12 +185,17 @@ void main() {
               ],
             },
           }),
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
           launchResult: IOSCoreDeviceLaunchResult.fromJson(const <String, Object?>{
             'info': <String, Object?>{'outcome': 'success'},
             'result': <String, Object?>{
               'process': <String, Object?>{'processIdentifier': 123},
             },
           }),
+<<<<<<< HEAD
+        );
+
+=======
           runningProcesses: [
             IOSCoreDeviceRunningProcess.fromJson(const <String, Object?>{
               'processIdentifier': 123,
@@ -196,6 +203,7 @@ void main() {
             }),
           ],
         );
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
         final processManager = FakeProcessManager.any();
         final logger = BufferLogger.test();
         final processUtils = ProcessUtils(processManager: processManager, logger: logger);
@@ -221,6 +229,9 @@ void main() {
       });
 
       testWithoutContext('fails on install', () async {
+<<<<<<< HEAD
+        final fakeCoreDeviceControl = FakeIOSCoreDeviceControl(installSuccess: false);
+=======
         final fakeCoreDeviceControl = FakeIOSCoreDeviceControl(
           installResult: IOSCoreDeviceInstallResult.fromJson(const <String, Object?>{
             'info': <String, Object?>{'outcome': 'success'},
@@ -287,6 +298,7 @@ void main() {
             }),
           ],
         );
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 
         final processManager = FakeProcessManager.any();
         final logger = BufferLogger.test();
@@ -314,7 +326,11 @@ void main() {
 
       testWithoutContext('fails on launch', () async {
         final fakeCoreDeviceControl = FakeIOSCoreDeviceControl(
-          installResult: IOSCoreDeviceInstallResult.fromJson(const <String, Object?>{
+<<<<<<< HEAD
+          launchResult: IOSCoreDeviceLaunchResult.fromJson(const <String, Object?>{
+            'info': <String, Object?>{'outcome': 'failed'},
+=======
+          installResult: IOSCoreDeviceInstallResult.fromJson(<String, Object?>{
             'info': <String, Object?>{'outcome': 'success'},
             'result': <String, Object?>{
               'installedApplications': [
@@ -322,19 +338,23 @@ void main() {
               ],
             },
           }),
-          launchResult: IOSCoreDeviceLaunchResult.fromJson(const <String, Object?>{
+          launchResult: IOSCoreDeviceLaunchResult.fromJson(<String, Object?>{
             'info': <String, Object?>{'outcome': 'success'},
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
             'result': <String, Object?>{
               'process': <String, Object?>{'processIdentifier': 123},
             },
           }),
+<<<<<<< HEAD
+=======
           runningProcesses: [
-            IOSCoreDeviceRunningProcess.fromJson(const <String, Object?>{
+            IOSCoreDeviceRunningProcess.fromJson(<String, Object?>{
               'processIdentifier': 123,
               'executable': '/asdf',
             }),
           ],
           launchSuccess: false,
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
         );
 
         final processManager = FakeProcessManager.any();
@@ -361,6 +381,40 @@ void main() {
         expect(fakeLLDB.attemptedToAttach, isFalse);
       });
 
+<<<<<<< HEAD
+      testWithoutContext('fails on null launch result', () async {
+        final fakeCoreDeviceControl = FakeIOSCoreDeviceControl();
+
+        final processManager = FakeProcessManager.any();
+        final logger = BufferLogger.test();
+        final processUtils = ProcessUtils(processManager: processManager, logger: logger);
+        final fakeLLDB = FakeLLDB();
+        final launcher = IOSCoreDeviceLauncher(
+          coreDeviceControl: fakeCoreDeviceControl,
+          logger: logger,
+          xcodeDebug: FakeXcodeDebug(),
+          fileSystem: MemoryFileSystem.test(),
+          processUtils: processUtils,
+          lldb: fakeLLDB,
+        );
+
+        final bool result = await launcher.launchAppWithLLDBDebugger(
+          deviceId: 'device-id',
+          bundlePath: 'bundle-path',
+          bundleId: 'bundle-id',
+          launchArguments: <String>[],
+        );
+
+        expect(result, isFalse);
+        expect(fakeLLDB.attemptedToAttach, isFalse);
+      });
+
+      testWithoutContext('fails on null launched process', () async {
+        final fakeCoreDeviceControl = FakeIOSCoreDeviceControl(
+          launchResult: IOSCoreDeviceLaunchResult.fromJson(const <String, Object?>{
+            'info': <String, Object?>{'outcome': 'success'},
+          }),
+=======
       testWithoutContext('fails on missing launched process', () async {
         final fakeCoreDeviceControl = FakeIOSCoreDeviceControl(
           installResult: IOSCoreDeviceInstallResult.fromJson(const <String, Object?>{
@@ -378,6 +432,7 @@ void main() {
             },
           }),
           runningProcesses: [],
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
         );
 
         final processManager = FakeProcessManager.any();
@@ -406,6 +461,12 @@ void main() {
 
       testWithoutContext('fails on null launched process id', () async {
         final fakeCoreDeviceControl = FakeIOSCoreDeviceControl(
+<<<<<<< HEAD
+          launchResult: IOSCoreDeviceLaunchResult.fromJson(const <String, Object?>{
+            'info': <String, Object?>{'outcome': 'success'},
+            'result': <String, Object?>{'process': <String, Object?>{}},
+          }),
+=======
           installResult: IOSCoreDeviceInstallResult.fromJson(const <String, Object?>{
             'info': <String, Object?>{'outcome': 'success'},
             'result': <String, Object?>{
@@ -423,6 +484,7 @@ void main() {
           runningProcesses: [
             IOSCoreDeviceRunningProcess.fromJson(const <String, Object?>{'executable': '/asdf'}),
           ],
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
         );
 
         final processManager = FakeProcessManager.any();
@@ -451,6 +513,8 @@ void main() {
 
       testWithoutContext('fails on lldb attach', () async {
         final fakeCoreDeviceControl = FakeIOSCoreDeviceControl(
+<<<<<<< HEAD
+=======
           installResult: IOSCoreDeviceInstallResult.fromJson(const <String, Object?>{
             'info': <String, Object?>{'outcome': 'success'},
             'result': <String, Object?>{
@@ -459,12 +523,17 @@ void main() {
               ],
             },
           }),
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
           launchResult: IOSCoreDeviceLaunchResult.fromJson(const <String, Object?>{
             'info': <String, Object?>{'outcome': 'success'},
             'result': <String, Object?>{
               'process': <String, Object?>{'processIdentifier': 123},
             },
           }),
+<<<<<<< HEAD
+        );
+
+=======
           runningProcesses: [
             IOSCoreDeviceRunningProcess.fromJson(const <String, Object?>{
               'processIdentifier': 123,
@@ -472,6 +541,7 @@ void main() {
             }),
           ],
         );
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
         final processManager = FakeProcessManager.any();
         final logger = BufferLogger.test();
         final processUtils = ProcessUtils(processManager: processManager, logger: logger);
@@ -744,6 +814,8 @@ void main() {
     });
   });
 
+<<<<<<< HEAD
+=======
   group('IOSCoreDeviceLogForwarder', () {
     testWithoutContext('addLog', () async {
       const expectedLog = 'hello world';
@@ -787,6 +859,7 @@ void main() {
     });
   });
 
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   group('Xcode prior to Core Device Control/Xcode 15', () {
     late BufferLogger logger;
     late FakeProcessManager fakeProcessManager;
@@ -853,7 +926,7 @@ void main() {
     });
   });
 
-  group('Core Device Control', () {
+  void void group('Core Device Control', () {
     late BufferLogger logger;
     late FakeProcessManager fakeProcessManager;
     late Xcode xcode;
@@ -1543,7 +1616,11 @@ invalid JSON
         expect(result!.outcome, 'success');
       });
 
+<<<<<<< HEAD
+      testWithoutContext('devicectl fails install with an error', () async {
+=======
       testWithoutContext('devicectl fails launch with an error', () async {
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
         const deviceControlOutput = '''
 {
   "error" : {
@@ -1620,7 +1697,11 @@ ERROR: The operation couldn?t be completed. (OSStatus error -10814.) (NSOSStatus
         expect(result, isNull);
       });
 
+<<<<<<< HEAD
+      testWithoutContext('devicectl fails install without an error', () async {
+=======
       testWithoutContext('devicectl fails launch without an error', () async {
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
         const deviceControlOutput = '''
 {
   "error" : {
@@ -1669,9 +1750,15 @@ ERROR: The operation couldn?t be completed. (OSStatus error -10814.) (NSOSStatus
               'launch',
               '--device',
               deviceId,
+<<<<<<< HEAD
+              bundleId,
+              '--json-output',
+              tempFile.path,
+=======
               '--json-output',
               tempFile.path,
               bundleId,
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
             ],
             onRun: (_) {
               expect(tempFile, exists);
@@ -2087,12 +2174,101 @@ Waiting for the application to terminate...
           ),
         );
 
+<<<<<<< HEAD
+        final IOSCoreDeviceLaunchResult? result = await deviceControl.launchApp(
+          deviceId: deviceId,
+          bundleId: bundleId,
+        );
+
+        expect(fakeProcessManager, hasNoRemainingExpectations);
+        expect(logger.traceText, contains('devicectl returned non-JSON response'));
+        expect(tempFile, isNot(exists));
+        expect(result, isNull);
+      });
+    });
+
+    group('terminate app', () {
+      const deviceId = 'device-id';
+      const processId = 1234;
+
+      testWithoutContext('Successful terminate app', () async {
+        const deviceControlOutput = '''
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "process",
+      "terminate",
+      "--device",
+      "00001234-0001234A3C03401E",
+      "--pid",
+      "1234",
+      "--json-output",
+      "./temp.txt"
+    ],
+    "commandType" : "devicectl.device.process.terminate",
+    "environment" : {
+      "TERM" : "xterm-256color"
+    },
+    "jsonVersion" : 2,
+    "outcome" : "success",
+    "version" : "477.29"
+  },
+  "result" : {
+    "deviceIdentifier" : "95F6A339-849B-50D6-B27A-4DB39527E070",
+    "deviceTimestamp" : "2025-08-07T16:13:35.220Z",
+    "process" : {
+      "executable" : "file:///private/var/containers/Bundle/Application/12345E6A-7F89-0C12-345E-F6A7E890CFF1/Runner.app/Runner",
+      "processIdentifier" : 1234
+    },
+    "signal" : {
+      "name" : "SIGTERM",
+      "value" : 15
+    }
+  }
+}
+''';
+        final File tempFile = fileSystem.systemTempDirectory
+            .childDirectory('core_devices.rand0')
+            .childFile('terminate_results.json');
+        fakeProcessManager.addCommand(
+          FakeCommand(
+            command: <String>[
+              'xcrun',
+              'devicectl',
+              'device',
+              'process',
+              'terminate',
+              '--device',
+              deviceId,
+              '--pid',
+              processId.toString(),
+              '--kill',
+              '--json-output',
+              tempFile.path,
+            ],
+            onRun: (_) {
+              expect(tempFile, exists);
+              tempFile.writeAsStringSync(deviceControlOutput);
+            },
+          ),
+        );
+
         final bool status = await deviceControl.terminateProcess(
           deviceId: deviceId,
           processId: processId,
         );
 
         expect(fakeProcessManager, hasNoRemainingExpectations);
+=======
+        final bool status = await deviceControl.terminateProcess(
+          deviceId: deviceId,
+          processId: processId,
+        );
+
+        expect(fakeProcessManager, hasNoRemainingExpectations);
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
         expect(logger.errorText, isEmpty);
         expect(tempFile, isNot(exists));
         expect(status, true);
@@ -3795,15 +3971,29 @@ invalid JSON
 class FakeIOSCoreDeviceControl extends Fake implements IOSCoreDeviceControl {
   FakeIOSCoreDeviceControl({
     this.installSuccess = true,
+<<<<<<< HEAD
+    this.launchResult,
+    this.terminateSuccess = true,
+=======
     this.installResult,
     this.launchSuccess = true,
     this.launchResult,
     this.terminateSuccess = true,
     this.runningProcesses = const <IOSCoreDeviceRunningProcess>[],
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   });
 
   bool installSuccess;
   IOSCoreDeviceLaunchResult? launchResult;
+<<<<<<< HEAD
+  bool terminateSuccess;
+  int? processTerminated;
+  bool get terminateProcessCalled => processTerminated != null;
+
+  @override
+  Future<bool> installApp({required String deviceId, required String bundlePath}) async {
+    return installSuccess;
+=======
   bool launchSuccess;
   IOSCoreDeviceInstallResult? installResult;
   bool terminateSuccess;
@@ -3823,6 +4013,7 @@ class FakeIOSCoreDeviceControl extends Fake implements IOSCoreDeviceControl {
       'info': <String, Object?>{'outcome': installSuccess ? 'success' : 'failure'},
     });
     return (installSuccess, result);
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   }
 
   @override
@@ -3836,6 +4027,8 @@ class FakeIOSCoreDeviceControl extends Fake implements IOSCoreDeviceControl {
   }
 
   @override
+<<<<<<< HEAD
+=======
   Future<bool> launchAppAndStreamLogs({
     required IOSCoreDeviceLogForwarder coreDeviceLogForwarder,
     required String deviceId,
@@ -3847,15 +4040,19 @@ class FakeIOSCoreDeviceControl extends Fake implements IOSCoreDeviceControl {
   }
 
   @override
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   Future<bool> terminateProcess({required String deviceId, required int processId}) async {
     processTerminated = processId;
     return terminateSuccess;
   }
+<<<<<<< HEAD
+=======
 
   @override
   Future<List<IOSCoreDeviceRunningProcess>> getRunningProcesses({required String deviceId}) async {
     return runningProcesses;
   }
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 }
 
 class FakeXcodeDebug extends Fake implements XcodeDebug {
@@ -3943,11 +4140,15 @@ class FakeLLDB extends Fake implements LLDB {
   }
 
   @override
+<<<<<<< HEAD
+  Future<bool> attachAndStart(String deviceId, int processId) async {
+=======
   Future<bool> attachAndStart({
     required String deviceId,
     required int appProcessId,
     required LLDBLogForwarder lldbLogForwarder,
   }) async {
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
     attemptedToAttach = true;
     return attachSuccess;
   }
@@ -4025,6 +4226,8 @@ class FakeIosProject extends Fake implements IosProject {
 }
 
 class FakeTemplateRenderer extends Fake implements TemplateRenderer {}
+<<<<<<< HEAD
+=======
 
 class FakeIOSCoreDeviceLogForwarder extends Fake implements IOSCoreDeviceLogForwarder {
   List<String> logs = [];
@@ -4043,3 +4246,4 @@ class FakeIOSCoreDeviceLogForwarder extends Fake implements IOSCoreDeviceLogForw
     logs.add(log);
   }
 }
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6

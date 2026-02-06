@@ -82,11 +82,14 @@ class FakeCustomBrowserDevice extends Fake implements ChromiumDevice {
   String get displayName => 'Dartium';
 }
 
+<<<<<<< HEAD
+=======
 extension on String {
   String get stripScriptUris =>
       replaceAll(RegExp(r"scriptUri:\s*'file:\/\/\/\S*',"), "scriptUri: 'STRIPPED',");
 }
 
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 void main() {
   late Directory originalCwd;
   late Directory tempDir;
@@ -96,7 +99,7 @@ void main() {
   late Logger logger;
   // We perform this initialization just so we can build the generated file path for test
   // descriptions.
-  var fs = LocalFileSystem.test(signals: Signals.test());
+  final fs = LocalFileSystem.test(signals: Signals.test());
   late BotDetector botDetector;
   late Platform platform;
   late FakeDeviceManager fakeDeviceManager;
@@ -110,7 +113,11 @@ void main() {
     await ensureFlutterToolsSnapshot();
     loggingProcessManager = LoggingProcessManager();
     shutdownHooks = ShutdownHooks();
+<<<<<<< HEAD
+    logger = BufferLogger.test();
+=======
     logger = WidgetPreviewMachineAwareLogger(BufferLogger.test(), machine: false, verbose: false);
+>>>>>>> 3final b62efc2a3da49882f43c372e0bc53daef7295a6
     fs = LocalFileSystem.test(signals: Signals.test());
     botDetector = const FakeBotDetector(false);
     tempDir = fs.systemTempDirectory.createTempSync('flutter_tools_create_test.');
@@ -187,7 +194,11 @@ void main() {
   void expectSinglePreviewLaunchTimingEvent() => expectNPreviewLaunchTimingEvents(1);
 
   void expectDeviceSelected(Device device) {
+<<<<<<< HEAD
+    final bufferLogger = logger as BufferLogger;
+=======
     final BufferLogger bufferLogger = asLogger<BufferLogger>(logger);
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
     expect(
       bufferLogger.statusText,
       contains('Launching the Widget Preview Scaffold on ${device.displayName}...'),

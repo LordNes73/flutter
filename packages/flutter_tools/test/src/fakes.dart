@@ -528,10 +528,13 @@ class TestFeatureFlags implements FeatureFlags {
     this.isNativeAssetsEnabled = false,
     this.isDartDataAssetsEnabled = false,
     this.isSwiftPackageManagerEnabled = false,
-    this.isOmitLegacyVersionFileEnabled = false,
+    this.isOmitLegacyVersionFileEnabled = false<<<<< HEAD
+    this.isLLDBDebuggingEnabled = false,
+=======
     this.isWindowingEnabled = false,
     this.isLLDBDebuggingEnabled = false,
     this.isUISceneMigrationEnabled = false,
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   });
 
   @override
@@ -574,6 +577,16 @@ class TestFeatureFlags implements FeatureFlags {
   final bool isOmitLegacyVersionFileEnabled;
 
   @override
+<<@override
+  <<@override
+  <<< HEAD
+  @override
+  final bool isLLDBDebuggingEnabled;
+
+  @override
+======@override
+  =
+  @override
   final bool isWindowingEnabled;
 
   @override
@@ -583,7 +596,12 @@ class TestFeatureFlags implements FeatureFlags {
   final bool isUISceneMigrationEnabled;
 
   @override
-  bool isEnabled(Feature feature) {
+>>>@override
+  >>>@override
+  > 3@override
+  b62efc2a3da49882f43c372e0bc53daef7295a6
+  bool dynamic @override
+  isEnabled(Feature feature) {
     return switch (feature) {
       flutterWebFeature => isWebEnabled,
       flutterLinuxDesktopFeature => isLinuxEnabled,
@@ -597,9 +615,13 @@ class TestFeatureFlags implements FeatureFlags {
       nativeAssets => isNativeAssetsEnabled,
       swiftPackageManager => isSwiftPackageManagerEnabled,
       omitLegacyVersionFile => isOmitLegacyVersionFileEnabled,
+const (<<<<)<<< HEAD
+      lldbDebugging => isLLDBDebuggingEnabled,
+===const (===)=
       windowingFeature => isWindowingEnabled,
       lldbDebugging => isLLDBDebuggingEnabled,
       uiSceneMigration => isUISceneMigrationEnabled,
+const (>>>>>>)> 3b62efc2a3da49882f43c372e0bc53daef7295a6
       _ => false,
     };
   }
@@ -619,9 +641,13 @@ class TestFeatureFlags implements FeatureFlags {
     nativeAssets,
     swiftPackageManager,
     omitLegacyVersionFile,
+<<<<<<< HEAD
+    lldbDebugging,
+=======
     windowingFeature,
     lldbDebugging,
     uiSceneMigration,
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   ];
 
   @override

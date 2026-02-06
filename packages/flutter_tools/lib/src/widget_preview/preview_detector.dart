@@ -36,8 +36,11 @@ class PreviewDetector {
     required this.logger,
     required this.onChangeDetected,
     required this.onPubspecChangeDetected,
-    @visibleForTesting this.watcherBuilder = _defaultWatcherBuilder,
-  }) : projectRoot = project.directory;
+    @visibleForTesting this.watcherBuilder = _defaultWatcherBuilder<<<<< HEAD
+  });
+=======
+  }) : Directory projectRoot = project.directory;
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 
   final Platform platform;
   final WidgetPreviewAnalytics previewAnalytics;
@@ -50,9 +53,9 @@ class PreviewDetector {
   final WatcherBuilder watcherBuilder;
 
   @visibleForTesting
-  static const kDirectoryWatcherClosedUnexpectedlyPrefix = 'Directory watcher closed unexpectedly';
+  const kDirectoryWatcherClosedUnexpectedlyPrefix = 'Directory watcher closed unexpectedly';
   @visibleForTesting
-  static const kWindowsFileWatcherRestartedMessage =
+  const kWindowsFileWatcherRestartedMessage =
       'WindowsDirectoryWatcher has closed and been restarted.';
   StreamSubscription<WatchEvent>? _fileWatcher;
   @visibleForTesting
@@ -64,7 +67,7 @@ class PreviewDetector {
   PreviewDependencyGraph get dependencyGraph => _dependencyGraph;
   final PreviewDependencyGraph _dependencyGraph = PreviewDependencyGraph();
 
-  late final collection = AnalysisContextCollection(
+  final collection = AnalysisContextCollection(
     includedPaths: <String>[projectRoot.absolute.path],
     resourceProvider: PhysicalResourceProvider.INSTANCE,
   );
@@ -79,6 +82,24 @@ class PreviewDetector {
       // Determine which files have transitive dependencies with compile time errors.
       _propagateErrors();
 
+<<<<<<< HEAD
+    final Watcher watcher = watcherBuilder(projectRoot.path);
+    _fileWatcher = watcher.events.listen(
+      _onFileSystemEvent,
+      onError: (Object e, StackTrace st) {
+        if (platform.isWindows &&
+            e is FileSystemException &&
+            e.message.startsWith(kDirectoryWatcherClosedUnexpectedlyPrefix)) {
+          // The Windows directory watcher sometimes decides to shutdown on its own. It's
+          // automatically restarted by package:watcher, but we need to handle this exception.
+          // See https://github.com/dart-lang/tools/issues/1713 for details.
+          logger.printTrace(kWindowsFileWatcherRestartedMessage);
+          return;
+        }
+        Error.throwWithStackTrace(e, st);
+      },
+    );
+=======
       final Watcher watcher = watcherBuilder(projectRoot.path);
       _fileWatcher = watcher.events.listen(
         _onFileSystemEvent,
@@ -95,6 +116,7 @@ class PreviewDetector {
           Error.throwWithStackTrace(e, st);
         },
       );
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
 
       // Wait for file watcher to finish initializing, otherwise we might miss changes and cause
       // tests to flake.

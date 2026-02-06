@@ -67,6 +67,11 @@ abstract class FeatureFlags {
   /// Tracking removal: <https://github.com/flutter/flutter/issues/171900>.
   bool get isOmitLegacyVersionFileEnabled;
 
+<<<<<<< HEAD
+  /// Whether physical iOS devices are debugging with LLDB.
+  bool get isLLDBDebuggingEnabled;
+
+=======
   /// Whether desktop windowing is enabled.
   bool get isWindowingEnabled;
 
@@ -76,6 +81,7 @@ abstract class FeatureFlags {
   /// Whether UIScene migration is enabled.
   bool get isUISceneMigrationEnabled;
 
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   /// Whether a particular feature is enabled for the current channel.
   ///
   /// Prefer using one of the specific getters above instead of this API.
@@ -96,9 +102,13 @@ abstract class FeatureFlags {
     dartDataAssets,
     swiftPackageManager,
     omitLegacyVersionFile,
+<<<<<<< HEAD
+    lldbDebugging,
+=======
     windowingFeature,
     lldbDebugging,
     uiSceneMigration,
+>>>>>>> 3b62efc2a3da49882f43c372e0bc53daef7295a6
   ];
 
   /// All current Flutter feature flags that can be configured.
@@ -266,6 +276,23 @@ const uiSceneMigration = Feature(
   master: FeatureChannelSetting(available: true),
   beta: FeatureChannelSetting(available: true),
   stable: FeatureChannelSetting(available: true),
+);
+
+/// Enable LLDB debugging for physical iOS devices. When LLDB debugging is off,
+/// Xcode debugging is used instead.
+///
+/// Requires iOS 17+ and Xcode 26+. If those requirements are not met, the previous
+/// default debugging method is used instead.
+const lldbDebugging = Feature(
+  name: 'support for debugging with LLDB for physical iOS devices',
+  extraHelpText:
+      'If LLDB debugging is off, Xcode debugging is used instead. '
+      'Only available for iOS 17 or newer devices. Requires Xcode 26 or greater.',
+  configSetting: 'enable-lldb-debugging',
+  environmentOverride: 'FLUTTER_LLDB_DEBUGGING',
+  master: FeatureChannelSetting(available: true, enabledByDefault: true),
+  beta: FeatureChannelSetting(available: true, enabledByDefault: true),
+  stable: FeatureChannelSetting(available: true, enabledByDefault: true),
 );
 
 /// A [Feature] is a process for conditionally enabling tool features.
